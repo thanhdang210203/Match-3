@@ -41,6 +41,9 @@ public class Board : MonoBehaviour
 
                 //Store the tilePrefabs Tile scrpit at the appropriate position in the array 
                 allTiles[row, col] = tile.GetComponent<Tile>();
+
+                //To keep things tidy, parent tiles to the Pieces object in the Hierarchy
+                tile.transform.parent = GameObject.Find("Tiles").transform;
             }
         }
     }
