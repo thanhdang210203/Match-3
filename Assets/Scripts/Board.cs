@@ -7,7 +7,7 @@ using UnityEngine;
     AUTHOR: DANG CONG THANH
     DATE: 27/09/2022
     Object(s) holding this script: Board
-    Sumarry: 
+    Sumarry: Creates a grid of tiles names them and tiles them to the Tiles GameObject
     THIS IS WHERE YOU WILL DO ALL THE THINGS THIS CLASS IS RESPONSIBLE FOR AS YOU WRITE THEM 
 ********************************************************************************************/
 
@@ -24,7 +24,9 @@ public class Board : MonoBehaviour
         allTiles = new Tile[width, height]; //construct a new array of size
         SetupTiles(); //calls the method below to construct the empty board
     }
-
+    //Instantiate a grid of tiles, rename the tiles, parent them to the Baord>Tiles objects 
+    //In the Hierarchy and adds their Tile scripts to the allTiles array 
+    //Called in Start()
     void SetupTiles()
     {
         for(int row = 0; row < width; row++)

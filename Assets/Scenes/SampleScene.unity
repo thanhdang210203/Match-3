@@ -356,9 +356,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 377b263213b39624fb232ee72112bb81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 0
-  height: 0
-  tileNormalPrefab: {fileID: 0}
+  width: 7
+  height: 9
+  tileNormalPrefab: {fileID: 1275862054022563095, guid: 9eb5c8132218b1148a684243a9a95713, type: 3}
 --- !u!4 &1541782339
 Transform:
   m_ObjectHideFlags: 0
