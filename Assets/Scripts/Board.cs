@@ -46,6 +46,11 @@ public class Board : MonoBehaviour
 
                 //To keep things tidy, parent tiles to the Pieces object in the Hierarchy
                 tile.transform.parent = GameObject.Find("Tiles").transform;
+                
+                //call the Init method on the tile and pass it row and col (which becoem Tile.xIndex and 
+                //Tile.yIndex and pass it a reference to the board which becomes Tile.boardScript;
+                allTiles[row, col].Init(row, col, this);
+                
             }
         }
     }
