@@ -16,12 +16,12 @@ public class Board : MonoBehaviour
     public int width; //board width 
     public int height; //board height
     public GameObject tileNormalPrefab; //a standard tile with the sprite attached  
-    private Tile[,] allTiles; //a 2 dimensional array holding all the board tile scripts
+    private Tile[,] AllTiles; //a 2 dimensional array holding all the board tile scripts
 
     // Start is called before the first frame update
     void Start()
     {
-        allTiles = new Tile[width, height]; //construct a new array of size
+        AllTiles = new Tile[width, height]; //construct a new array of size
         SetupTiles(); //calls the method below to construct the empty board
     }
     //Instantiate a grid of tiles, rename the tiles, parent them to the Baord>Tiles objects 
@@ -42,14 +42,14 @@ public class Board : MonoBehaviour
                 tile.name = "Tile (" + row + "," + col + ")";
 
                 //Store the tilePrefabs Tile scrpit at the appropriate position in the array 
-                allTiles[row, col] = tile.GetComponent<Tile>();
+                AllTiles[row, col] = tile.GetComponent<Tile>();
 
                 //To keep things tidy, parent tiles to the Pieces object in the Hierarchy
                 tile.transform.parent = GameObject.Find("Tiles").transform;
                 
                 //call the Init method on the tile and pass it row and col (which becoem Tile.xIndex and 
                 //Tile.yIndex and pass it a reference to the board which becomes Tile.boardScript;
-                allTiles[row, col].Init(row, col, this);
+                AllTiles[row, col].Init(row, col, this);
                 
             }
         }

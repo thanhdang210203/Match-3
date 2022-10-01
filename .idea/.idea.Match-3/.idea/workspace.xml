@@ -6,22 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="07c629a0-ae01-47f1-8f97-0f1b4f7be0ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Blue.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Green.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Green.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Orange.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Orange.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Purple.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Purple.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Red.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Red.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Yellow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Yellow.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefab/Tile.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Tile.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Board.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Board.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Blue.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Blue.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Green.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Green.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Orange.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Orange.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Purple.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Purple.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Red.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Red.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Yellow.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Sprites/Simple Pieces/Simple Piece Yellow.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,25 +24,28 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2FR6YWPtZuMx7MeeRzVWNdz3qDm" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Discover.Launch.Via.Unity": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "settings.editor.selected.configurable": "RiderDpaPageId",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="E:\Unity\2021.3.10f1\Editor\Unity.exe" />
@@ -96,6 +89,12 @@
       <workItem from="1664445099478" duration="14000" />
       <workItem from="1664447754574" duration="10513000" />
       <workItem from="1664471863789" duration="1385000" />
+      <workItem from="1664541874832" duration="3584000" />
+      <workItem from="1664565213037" duration="1411000" />
+      <workItem from="1664569034886" duration="942000" />
+      <workItem from="1664598842496" duration="3866000" />
+      <workItem from="1664605047545" duration="1954000" />
+      <workItem from="1664615995304" duration="3836000" />
     </task>
     <servers />
   </component>
