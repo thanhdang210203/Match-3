@@ -39,30 +39,33 @@ public class Tile : MonoBehaviour
     //a tile has been clicked on 
     private void OnMouseDown() //Tile location not appearing in Debug mode
     {
-        if (PieceManager == null)
+        if (PieceManager != null)
         {
             //call ClickTile() and pass in the tile that has been clicked 
             PieceManager.ClickTile(this);
+            Debug.Log("Mouse Down");
         }
     }
     
     //A tile has been entered by the mouse 
     private void OnMouseOver() //Tile location not appearing in Debug mode
     {
-        if (PieceManager == null)
+        if (PieceManager != null)
         {
             //call DragToTile() and pass in the tile that has been rolled over 
             PieceManager.DragToTile(this);
+            Debug.Log("Mouse Over");
         } 
     }
     
     //the mouse has been released over a tile
     private void OnMouseUp() //Tile location not appearing in Debug mode
     {
-        if (PieceManager == null)
+        if (PieceManager != null)
         {
             //call ReleaseTIle() to switch between the clickedTile and the targetTile 
             PieceManager.ReleaseTile();
+            Debug.Log("Mouse Release");
         }   
     }
 }

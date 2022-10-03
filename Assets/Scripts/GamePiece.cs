@@ -5,20 +5,20 @@ using UnityEngine;
     AUTHOR: DANG CONG THANH
     DATE: 27/09/2022
     Object(s) holding this script: Game Piece 
-    Sumarry: Initialise a game piece and assign it an xIndex and yIndex
+    Summary: Initialise a game piece and assign it an xIndex and yIndex
     Move the game pieces using Vector3.Lerp
 ********************************************************************************************/
 public class GamePiece : MonoBehaviour
 {
     public int xIndex; //the current x-coordinate of the game piece 
-    public int yindex; //the current y-coordinate of the game piece 
+    public int yIndex; //the current y-coordinate of the game piece 
     private bool _isMoving = false; //Check if whether the piece are moving right now 
 
-    private PieceManager PieceManager; //a reference to the pieceManger class 
+    private PieceManager _pieceManager; //a reference to the pieceManger class 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _pieceManager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class GamePiece : MonoBehaviour
     public void Init(PieceManager pm)
     {
         //set the pieceManager variable to the one passed in to the function 
-        PieceManager = pm;
+        //_pieceManager = pm;
         
     }
     
@@ -51,10 +51,10 @@ public class GamePiece : MonoBehaviour
     public void SetCoord(int x, int y)
     {
         xIndex = x; //set xIndex to the x value passed in by the function call
-        yindex = y; //set yIndex to the y value passed in by the function call
+        yIndex = y; //set yIndex to the y value passed in by the function call
     }
     //Called by ***
-    public void Move(int destX, int destY, float timeToMove)
+    private void Move(int destX, int destY, float timeToMove)
     {
         if (_isMoving == false) //game pieces are currently moving to a new destination 
         {
@@ -72,7 +72,7 @@ public class GamePiece : MonoBehaviour
         //store the start position of the game pieces as variables 
         Vector3 startPosition = this.transform.position;
         
-        //bool flag used to determine whether we have arrived at the destiation passed in 
+        //bool flag used to determine whether we have arrived at the destination passed in 
         bool reachedDestination = false;
         
         //set IsMoving to true cuz moving has started 
@@ -88,11 +88,15 @@ public class GamePiece : MonoBehaviour
             if (Vector3.Distance(this.transform.position, destination) < 0.01f)
             {
                 reachedDestination = true; //break out of the loop 
+                if (_pieceManager != null)
+                {
+                    //call the PlaceGamePiece() function to set the pieces final position, to
+                    //set it's xIndex and yIndex and to add it to the allGamePieces array
+                    //PlaceGamePieces receives 2 ints, so recast the destination x and y as ints 
+                    _pieceManager.PlaceGamePiece(this, (int)destination.x, (int)destination.y);
+                }
                 
-                //call the PlaceGamePiece() function to set the pieces final position, to
-                //set it's xIndex and yIndex and to add it to the allGamePieces array
-                //PlaceGamePieces receives 2 ints, so recast the destination x and y as ints 
-                PieceManager.PlaceGamePiece(this, (int)destination.x, (int)destination.y);
+                
                 
                 /*//update the game pieces with its new coordinates by 
                 //changing it's xIndex and yIndex 

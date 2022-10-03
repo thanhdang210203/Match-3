@@ -22,6 +22,7 @@ public class PieceManager : MonoBehaviour
     [SerializeField] private Tile clickedTile; //the tile player clicks on first to move the game piece 
     [SerializeField] private Tile targetTile; //the tile the player want the game piece to move to 
     private Board board; //reference to the Board class 
+    public float swapTime = 0.5f;
     
     
     // Start is called before the first frame update
@@ -30,6 +31,7 @@ public class PieceManager : MonoBehaviour
         board = GameObject.Find("Board").GetComponent<Board>();
         allGamePieces = new GamePiece[board.width, board.height]; //construct a new array of size width and height
         FillRandom();   
+        
     }
 
     // Update is called once per frame
@@ -112,9 +114,12 @@ public class PieceManager : MonoBehaviour
         {
             for (int col = 0; col < board.height; col++)
             {
+                GameObject randomPieces = GetRandomGamePiece();
                 //instantiate the gamePiecesPrefab at coordinates row and col
                 //Instantiate() constructs an Object, so this 'cast' it instead as a GameObject
-                GameObject randomPiece = Instantiate(GetRandomGamePiece(), new Vector3(row, col, 0), Quaternion.identity) as GameObject;
+                GameObject randomPiece = Instantiate(randomPieces, new Vector3(row, col, 0), Quaternion.identity) as GameObject;
+                
+                randomPiece.GetComponent<GamePiece>().Init(this);
                
                 //Set the tile name to it's coordinate
                 randomPiece.name = "Piece (" + row + "," + col + ")";
@@ -132,7 +137,7 @@ public class PieceManager : MonoBehaviour
                 if (randomPiece == null)
                 {
                     //Initialise the GamePiece to give it access to the PieceManager 
-                    randomPiece.GetComponent<GamePiece>().Init(this);
+                    
                     
                     Debug.LogWarning("Piece error!");
                     return;
@@ -179,6 +184,10 @@ public class PieceManager : MonoBehaviour
             //call SwitchTile() below to switch the two's position
             SwitchTile(clickedTile, targetTile);
         }
+        
+        //reset the clickedTile and targetTile so tiles can be clicked again 
+        clickedTile = null;
+        targetTile = null;
     }
 
     void SwitchTile(Tile tileClicked, Tile tileTargeted)

@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xIndex: 0
-  yindex: 0
+  yIndex: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,8 +380,9 @@ MonoBehaviour:
   - {fileID: 5239201358531302052, guid: 82183e96884cbb8489d692f0a49f195d, type: 3}
   - {fileID: 8109432745079825868, guid: 208844e3e3432f642a5295a7c5f21b5c, type: 3}
   - {fileID: 1288973550151946213, guid: 26c0dd074b4ff7b4fbf97b8ac2a23944, type: 3}
-  clickedTile: {fileID: 1375909212}
-  targetTile: {fileID: 1375909212}
+  clickedTile: {fileID: 0}
+  targetTile: {fileID: 0}
+  swapTime: 0.5
 --- !u!1 &1375909210
 GameObject:
   m_ObjectHideFlags: 0
