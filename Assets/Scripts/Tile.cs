@@ -17,14 +17,15 @@ public class Tile : MonoBehaviour
     public int xIndex; //the x location of the tile 
     public int yIndex; //the y location of the tile 
     
-    private PieceManager PieceManager;
+    private PieceManager _pieceManager;
     
     private Board boardScript;
     // Start is called before the first frame update
     void Start()
     {
         //get the reference to the PieceManager class
-        PieceManager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
+        _pieceManager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
+        Debug.Log(_pieceManager);
     }
     //Sets the xIndex, yIndex and boardScript variables to the ones passed in
     //We are passing in a boardScript in case later we want more than one boardScript in our game 
@@ -39,21 +40,23 @@ public class Tile : MonoBehaviour
     //a tile has been clicked on 
     private void OnMouseDown() //Tile location not appearing in Debug mode
     {
-        if (PieceManager != null)
+        Debug.Log(_pieceManager);
+        if (_pieceManager != null)
         {
             //call ClickTile() and pass in the tile that has been clicked 
-            PieceManager.ClickTile(this);
+            _pieceManager.ClickTile(this);
             Debug.Log("Mouse Down");
         }
+        
     }
     
     //A tile has been entered by the mouse 
     private void OnMouseOver() //Tile location not appearing in Debug mode
     {
-        if (PieceManager != null)
+        if (_pieceManager != null)
         {
             //call DragToTile() and pass in the tile that has been rolled over 
-            PieceManager.DragToTile(this);
+            _pieceManager.DragToTile(this);
             Debug.Log("Mouse Over");
         } 
     }
@@ -61,10 +64,10 @@ public class Tile : MonoBehaviour
     //the mouse has been released over a tile
     private void OnMouseUp() //Tile location not appearing in Debug mode
     {
-        if (PieceManager != null)
+        if (_pieceManager != null)
         {
             //call ReleaseTIle() to switch between the clickedTile and the targetTile 
-            PieceManager.ReleaseTile();
+            _pieceManager.ReleaseTile();
             Debug.Log("Mouse Release");
         }   
     }

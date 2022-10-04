@@ -14,11 +14,11 @@ public class GamePiece : MonoBehaviour
     public int yIndex; //the current y-coordinate of the game piece 
     private bool _isMoving = false; //Check if whether the piece are moving right now 
 
-    private PieceManager _pieceManager; //a reference to the pieceManger class 
+    private PieceManager pieceMana; //a reference to the pieceManger class 
     // Start is called before the first frame update
     void Start()
     {
-        _pieceManager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
+        pieceMana = GameObject.Find("PieceManager").GetComponent<PieceManager>();
     }
 
     // Update is called once per frame
@@ -41,7 +41,7 @@ public class GamePiece : MonoBehaviour
     public void Init(PieceManager pm)
     {
         //set the pieceManager variable to the one passed in to the function 
-        //_pieceManager = pm;
+        pieceMana = pm;
         
     }
     
@@ -54,7 +54,7 @@ public class GamePiece : MonoBehaviour
         yIndex = y; //set yIndex to the y value passed in by the function call
     }
     //Called by ***
-    private void Move(int destX, int destY, float timeToMove)
+    public void Move(int destX, int destY, float timeToMove)
     {
         if (_isMoving == false) //game pieces are currently moving to a new destination 
         {
@@ -88,20 +88,13 @@ public class GamePiece : MonoBehaviour
             if (Vector3.Distance(this.transform.position, destination) < 0.01f)
             {
                 reachedDestination = true; //break out of the loop 
-                if (_pieceManager != null)
+                if (pieceMana != null)
                 {
                     //call the PlaceGamePiece() function to set the pieces final position, to
                     //set it's xIndex and yIndex and to add it to the allGamePieces array
                     //PlaceGamePieces receives 2 ints, so recast the destination x and y as ints 
-                    _pieceManager.PlaceGamePiece(this, (int)destination.x, (int)destination.y);
+                    pieceMana.PlaceGamePiece(this, (int)destination.x, (int)destination.y);
                 }
-                
-                
-                
-                /*//update the game pieces with its new coordinates by 
-                //changing it's xIndex and yIndex 
-                SetCoord((int)destination.x, (int)destination.y);*/
-                
                 //break out of the while loop immediately to save running all the remaining code
                 break;
             }

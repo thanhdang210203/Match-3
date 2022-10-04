@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Random = UnityEngine.Random;
 
 /********************************************************************************************
@@ -19,6 +21,8 @@ public class PieceManager : MonoBehaviour
 {
     public GameObject[] gamePiecePrefab; //an array of all the game pieces in the game as GameObject
     private GamePiece[,] allGamePieces; //a 2-dimensional array holding all the game piece's GamePiece scripts
+    [SerializeField] private GamePiece _clickedPiece; //a reference to the GamePiece() class 
+    [SerializeField] private GamePiece _targetPiece; //a reference to the GamePiece() class 
     [SerializeField] private Tile clickedTile; //the tile player clicks on first to move the game piece 
     [SerializeField] private Tile targetTile; //the tile the player want the game piece to move to 
     private Board board; //reference to the Board class 
@@ -76,7 +80,7 @@ public class PieceManager : MonoBehaviour
         //set the rotation back to zero if accidentally rotate it 
         gamePiece.transform.rotation = Quaternion.identity;
 
-        //calls the function to see if the x and the y are in the boudary of the board
+        //calls the function to see if the x and the y are in the boundary of the board
         //IsWithinBounds returns true or false
         if (IsWithinBounds(x, y) == true)
         {
@@ -84,7 +88,6 @@ public class PieceManager : MonoBehaviour
             allGamePieces[x, y] = gamePiece;
         }
         
-            
         //call the SetCoord() method to populate GamePiece.xIndex and GamePiece.yIndex variable 
         gamePiece.SetCoord(x, y);
         
@@ -109,18 +112,15 @@ public class PieceManager : MonoBehaviour
     }
     private void FillRandom()
     {
-        
         for (int row = 0; row < board.width; row++)
         {
             for (int col = 0; col < board.height; col++)
-            {
+            { 
                 GameObject randomPieces = GetRandomGamePiece();
                 //instantiate the gamePiecesPrefab at coordinates row and col
                 //Instantiate() constructs an Object, so this 'cast' it instead as a GameObject
                 GameObject randomPiece = Instantiate(randomPieces, new Vector3(row, col, 0), Quaternion.identity) as GameObject;
                 
-                randomPiece.GetComponent<GamePiece>().Init(this);
-               
                 //Set the tile name to it's coordinate
                 randomPiece.name = "Piece (" + row + "," + col + ")";
                 
@@ -134,16 +134,12 @@ public class PieceManager : MonoBehaviour
                 //SetCoord.yIndex
                 allGamePieces[row, col].SetCoord(row, col);
 
-                if (randomPiece == null)
+                //Defensive programming to make sure the randomPiece returned is a value
+                if (randomPiece != null)
                 {
                     //Initialise the GamePiece to give it access to the PieceManager 
-                    
-                    
-                    Debug.LogWarning("Piece error!");
-                    return;
+                    randomPiece.GetComponent<GamePiece>().Init(this);
                 }
-                
-                
             }
         }
     }
@@ -170,6 +166,7 @@ public class PieceManager : MonoBehaviour
             {
                 //set the target tile to the tile passed in 
                 targetTile = tile;
+                Debug.Log("Target Tile: " + targetTile.name);
             }
     }
     
@@ -183,6 +180,7 @@ public class PieceManager : MonoBehaviour
         {
             //call SwitchTile() below to switch the two's position
             SwitchTile(clickedTile, targetTile);
+             //Debug.Log("tt " + targetTile.name);
         }
         
         //reset the clickedTile and targetTile so tiles can be clicked again 
@@ -193,9 +191,28 @@ public class PieceManager : MonoBehaviour
     void SwitchTile(Tile tileClicked, Tile tileTargeted)
     {
         //add code to switch tiles
+        if (_clickedPiece != null) //wont run if _clickedPiece is null 
+        {
+            _clickedPiece = allGamePieces[tileClicked.xIndex, tileClicked.yIndex];
+            Debug.Log("Clicking piece");
+        }
+
+        if (_targetPiece != null)
+        {
+            _targetPiece = allGamePieces[tileTargeted.xIndex, tileTargeted.yIndex];
+            Debug.Log("Targeting piece");
+        }
+
+        if (_clickedPiece != null && _targetPiece != null)
+        {
+            _clickedPiece.Move(_targetPiece.xIndex, _targetPiece.yIndex, swapTime);
+            _targetPiece.Move(_clickedPiece.xIndex, _clickedPiece.yIndex, swapTime);
+            Debug.Log("Switching");
+            //_clickedPiece = null;
+            //_targetPiece = null;
+        }
         
         //reset the two so they can be click again 
-        clickedTile = null;
-        targetTile = null;
+       
     }
 }
