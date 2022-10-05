@@ -191,13 +191,13 @@ public class PieceManager : MonoBehaviour
     void SwitchTile(Tile tileClicked, Tile tileTargeted)
     {
         //add code to switch tiles
-        if (_clickedPiece != null) //wont run if _clickedPiece is null 
+        if (_clickedPiece == null) //wont run if _clickedPiece is null 
         {
             _clickedPiece = allGamePieces[tileClicked.xIndex, tileClicked.yIndex];
             Debug.Log("Clicking piece");
         }
 
-        if (_targetPiece != null)
+        if (_targetPiece == null)
         {
             _targetPiece = allGamePieces[tileTargeted.xIndex, tileTargeted.yIndex];
             Debug.Log("Targeting piece");
@@ -208,8 +208,8 @@ public class PieceManager : MonoBehaviour
             _clickedPiece.Move(_targetPiece.xIndex, _targetPiece.yIndex, swapTime);
             _targetPiece.Move(_clickedPiece.xIndex, _clickedPiece.yIndex, swapTime);
             Debug.Log("Switching");
-            //_clickedPiece = null;
-            //_targetPiece = null;
+            _clickedPiece = null;
+            _targetPiece = null;
         }
         
         //reset the two so they can be click again 

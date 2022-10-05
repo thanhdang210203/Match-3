@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="07c629a0-ae01-47f1-8f97-0f1b4f7be0ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,10 +61,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="23300">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="23300" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -95,8 +94,17 @@
       <workItem from="1664778805540" duration="4431000" />
       <workItem from="1664856274125" duration="6241000" />
       <workItem from="1664862630623" duration="4000" />
-      <workItem from="1664869494520" duration="2536000" />
+      <workItem from="1664869494520" duration="3163000" />
+      <workItem from="1664939872883" duration="68000" />
     </task>
+    <task id="LOCAL-00001" summary="cant">
+      <created>1664872363256</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1664872363256</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -118,6 +126,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="cant" />
+    <option name="LAST_COMMIT_MESSAGE" value="cant" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

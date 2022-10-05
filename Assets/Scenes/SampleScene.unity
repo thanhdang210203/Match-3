@@ -380,6 +380,8 @@ MonoBehaviour:
   - {fileID: 5239201358531302052, guid: 82183e96884cbb8489d692f0a49f195d, type: 3}
   - {fileID: 8109432745079825868, guid: 208844e3e3432f642a5295a7c5f21b5c, type: 3}
   - {fileID: 1288973550151946213, guid: 26c0dd074b4ff7b4fbf97b8ac2a23944, type: 3}
+  _clickedPiece: {fileID: 0}
+  _targetPiece: {fileID: 0}
   clickedTile: {fileID: 0}
   targetTile: {fileID: 0}
   swapTime: 0.5
