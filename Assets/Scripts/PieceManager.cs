@@ -162,14 +162,14 @@ public class PieceManager : MonoBehaviour
     public void DragToTile(Tile tile)
     {
             //if there is a tile that has been clicked on
-            if (clickedTile != null)
+            if (clickedTile != null && IsNextTo(clickedTile, tile))
             {
                 //set the target tile to the tile passed in 
                 targetTile = tile;
                 Debug.Log("Target Tile: " + targetTile.name);
             }
     }
-    
+      
     //Checks if clickedTile and targetTile are valid tiles and 
     //calls SwitchTile() below to swap their places
     //called by ****
@@ -190,6 +190,7 @@ public class PieceManager : MonoBehaviour
 
     void SwitchTile(Tile tileClicked, Tile tileTargeted)
     {
+       
         //add code to switch tiles
         if (_clickedPiece == null) //wont run if _clickedPiece is null 
         {
@@ -214,5 +215,29 @@ public class PieceManager : MonoBehaviour
         
         //reset the two so they can be click again 
        
+    }
+
+    bool IsNextTo(Tile startTile, Tile endTile)
+    {
+        int xStart = startTile.xIndex;
+        int xEnd = endTile.xIndex;
+        int yStart = startTile.yIndex;
+        int yEnd = endTile.yIndex;
+
+        //Move 1 to the left 
+        if (Mathf.Abs(Mathf.Abs(xStart) - Mathf.Abs(xEnd)) == 1 && Mathf.Abs(yStart - yEnd) == 0)
+        {
+            Debug.Log("Moving left right");
+            return true;
+        }
+        //Move 1 up
+        if (Mathf.Abs(Mathf.Abs(yEnd) - Mathf.Abs(yStart))  == 1 && Mathf.Abs(xStart - xEnd) == 0)
+        {
+            Debug.Log("Moving up down");
+            return true;
+        } 
+       
+        return false;
+
     }
 }

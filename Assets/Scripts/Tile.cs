@@ -24,7 +24,7 @@ public class Tile : MonoBehaviour
     void Start()
     {
         //get the reference to the PieceManager class
-        _pieceManager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
+            _pieceManager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
         Debug.Log(_pieceManager);
     }
     //Sets the xIndex, yIndex and boardScript variables to the ones passed in
