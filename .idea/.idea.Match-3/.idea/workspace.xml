@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="07c629a0-ae01-47f1-8f97-0f1b4f7be0ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Green.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Green.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Orange.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Orange.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Purple.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Purple.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Red.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Red.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Yellow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Yellow.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tile.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +21,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MatchManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -44,7 +50,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Hub\Editor\2021.3.10f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="E:\Unity\2021.3.10f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Han On D\Git\Match-3&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Han On D\Git\Match-3" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -61,10 +67,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="21540">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="21540" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -97,6 +103,11 @@
       <workItem from="1664869494520" duration="3163000" />
       <workItem from="1664939872883" duration="68000" />
       <workItem from="1665047357926" duration="3113000" />
+      <workItem from="1665052036564" duration="185000" />
+      <workItem from="1665074350133" duration="1222000" />
+      <workItem from="1665075646356" duration="2247000" />
+      <workItem from="1665077936384" duration="122000" />
+      <workItem from="1665078080636" duration="4160000" />
     </task>
     <task id="LOCAL-00001" summary="cant">
       <created>1664872363256</created>
@@ -131,36 +142,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="cant" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/PieceManager.cs</url>
-          <line>221</line>
-          <properties documentPath="D:\Han On D\Git\Match-3\Assets\Scripts\PieceManager.cs" initialLine="221" containingFunctionPresentation="method 'IsNextTo'">
-            <startOffsets>
-              <option value="8651" />
-            </startOffsets>
-            <endOffsets>
-              <option value="8681" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/PieceManager.cs</url>
-          <line>196</line>
-          <properties documentPath="D:\Han On D\Git\Match-3\Assets\Scripts\PieceManager.cs" initialLine="196" containingFunctionPresentation="method 'SwitchTile'">
-            <startOffsets>
-              <option value="7858" />
-            </startOffsets>
-            <endOffsets>
-              <option value="7928" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="UNITY_DEBUG_RUN_CONFIGURATION">
         <watch expression="_pieceManager.PlaceGamePiece(this, (int)destination.x, (int)destination.y);" />

@@ -20,7 +20,7 @@ using Random = UnityEngine.Random;
 public class PieceManager : MonoBehaviour
 {
     public GameObject[] gamePiecePrefab; //an array of all the game pieces in the game as GameObject
-    private GamePiece[,] allGamePieces; //a 2-dimensional array holding all the game piece's GamePiece scripts
+    public GamePiece[,] allGamePieces; //a 2-dimensional array holding all the game piece's GamePiece scripts
     [SerializeField] private GamePiece _clickedPiece; //a reference to the GamePiece() class 
     [SerializeField] private GamePiece _targetPiece; //a reference to the GamePiece() class 
     [SerializeField] private Tile clickedTile; //the tile player clicks on first to move the game piece 
@@ -95,8 +95,9 @@ public class PieceManager : MonoBehaviour
     
     //Function that returns true or false depending on the x, y coordinates
     //passed in are within the boundary of the board 
-    //Called by ****
-    bool IsWithinBounds(int x, int y)
+    //Called by PlaceGamePiece() above when adding a piece to the allGamePieces array 
+    //Called by MatchManager.FindMatches() to check the piece we start the search from is within the board
+    public bool IsWithinBounds(int x, int y)
     {
         //checks to make sure if x is between 0 and the width -1 and y is 
         //with 0 and the height -1

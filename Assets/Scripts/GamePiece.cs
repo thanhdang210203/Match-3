@@ -15,6 +15,22 @@ public class GamePiece : MonoBehaviour
     private bool _isMoving = false; //Check if whether the piece are moving right now 
 
     private PieceManager pieceMana; //a reference to the pieceManger class 
+
+    //the color of the piece, defined in the Inspector using the enum below 
+    //the type of the variable must be the same as the name of the enum to link them
+    public MatchValue matchValue;
+
+    //Assign a constant to each color of piece 
+    //This is used to determine whether pieces match, even if they have different sprites
+    public enum MatchValue
+    {
+        blue,
+        green, 
+        red,
+        orange,
+        purple, 
+        yellow
+    };
     // Start is called before the first frame update
     void Start()
     {
