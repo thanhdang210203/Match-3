@@ -24,7 +24,7 @@ public class PieceManager : MonoBehaviour
     [SerializeField] private GamePiece _clickedPiece; //a reference to the GamePiece() class 
     [SerializeField] private GamePiece _targetPiece; //a reference to the GamePiece() class 
     [SerializeField] private Tile clickedTile; //the tile player clicks on first to move the game piece 
-    [SerializeField] private Tile targetTile; //the tile the player want the game piece to move to 
+    [SerializeField] private Tile targetTile; //the tile the player wan t the game piece to move to 
     private Board board; //reference to the Board class 
     public float swapTime = 0.5f;
     
