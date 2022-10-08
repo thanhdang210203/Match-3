@@ -38,12 +38,6 @@ public class PieceManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     //Returns a random game piece from the GamePiecesPrefab array
     //Called by ****
     GameObject GetRandomGamePiece()
@@ -97,6 +91,7 @@ public class PieceManager : MonoBehaviour
     //passed in are within the boundary of the board 
     //Called by PlaceGamePiece() above when adding a piece to the allGamePieces array 
     //Called by MatchManager.FindMatches() to check the piece we start the search from is within the board
+    //Called by MatchManager.FindMatches() to check whether the next piece we are checking for matches is within the board
     public bool IsWithinBounds(int x, int y)
     {
         //checks to make sure if x is between 0 and the width -1 and y is 

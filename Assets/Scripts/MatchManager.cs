@@ -57,5 +57,47 @@ public class MatchManager : MonoBehaviour
         int nextX; //the x-coordinates of the next tile to search 
         int nextY; //the y-coordinates of the next tile to search 
         int maxSearches; //the max num of searches that we will do 
+        
+        //set the value of the maximum number of searches we will do either 
+        //the width or height of the board (which ever is the greater)
+        if (_board.width > _board.height)
+        {
+            maxSearches = _board.width;
+        }
+        else
+        {
+            maxSearches = _board.height;
+        }
+
+        //create a loop to start the search for matches 
+        //we don't need to start at zero because the startPiece is zero
+        //we also dont need to go all the way to maxSearches because the startPiece is one of them
+        for (int i = 1; i < maxSearches; i++)
+        {
+            //search direction is a Vector2, (1,0), (-1, 0), (0, 1) or (0, -1)
+            //so if searchDirection.x = 1 or -1, and searchDirection.y = 0 multiplying by i
+            //will search each piece in the same row as the startPiecce.
+            //if searchDirection.x = 0, and searchDirection.y = 1 or -1, multiplying it by i 
+            //will search up and down and not change the x
+            nextX = startX + (int) Mathf.Clamp(searchDirection.x, -1, 1) * i;
+            nextY = startY + (int) Mathf.Clamp(searchDirection.y, -1, 1) * i;
+            
+            //if the nextX or nextY is outside the board, our search is finished so break out of the loop
+            if (_pieceManager.IsWithinBounds(nextX, nextY) == false)
+            {
+                break;
+            }
+            
+            //if the next piece is within the bounds of the board create a 
+            //variable to store the next piece
+            GamePiece nextPiece = _pieceManager.allGamePieces[nextX, nextY];
+            
+            //if the nextPiece matches the startPiece 
+            if (nextPiece.matchValue == startPiece.matchValue)
+            {
+                
+            }
+        }
+        return null;
     }
 }

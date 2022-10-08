@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="07c629a0-ae01-47f1-8f97-0f1b4f7be0ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Green.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Green.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Orange.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Orange.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Purple.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Purple.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Red.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Red.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Yellow.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefab/Simple Piece Yellow.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GamePiece.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/MatchManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MatchManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,6 +103,8 @@
       <workItem from="1665075646356" duration="2247000" />
       <workItem from="1665077936384" duration="122000" />
       <workItem from="1665078080636" duration="4160000" />
+      <workItem from="1665091197568" duration="2237000" />
+      <workItem from="1665203442562" duration="5333000" />
     </task>
     <task id="LOCAL-00001" summary="cant">
       <created>1664872363256</created>
