@@ -17,6 +17,8 @@ public class MatchManager : MonoBehaviour
 
         //get access to the Board class
         _board = GameObject.Find("Board").GetComponent<Board>();
+        
+        Debug.Log("Reading IsWithinBound() as: " + _pieceManager.IsWithinBounds(0, 0));
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class MatchManager : MonoBehaviour
     //Looks for matches and then stores matching pieces in a list which it then returns to the function calling this
     //minLength has a default value which makes it an optional parameter. If I dont pass a fourth argument in, it will use 3
     //called by FindVerticalMatches() to search for vertical matches from the start piece 
+    //called by FindHorizontalMatches() to search for horizontal matches from the start piece 
     List<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection, int minLength = 3)
     {
         //create a list that will be returned if an appropriate match is found 
@@ -163,5 +166,44 @@ public class MatchManager : MonoBehaviour
         }
     }
     
-    
+    //Calls FindMatches() and searches in a left and right direction 
+    //Returns a list of all horizontal matches
+    //Called by
+    List<GamePiece> FindHorizontalMatches(int startX, int startY, int minLength = 3)
+    {
+        //calls FindMatches() and passes in a direction to search right and then left
+        //we pass in a min Length of 2 (not 3) because it is possible to match 3
+        //by matching to the left of the start piece and one to the right 
+        //(we will combine these two lists later)
+        List<GamePiece> rightMatches = FindMatches(startX, startY, new Vector2(1, 0), 2);
+        List<GamePiece> leftMatches = FindMatches(startX, startY, new Vector2(-1, 0), 2);
+        
+        //we cannot use System.Linq.Union() method to combine two Lists if any of them are full
+        //so if they are, we need to set them to empty list
+        if (rightMatches == null)
+        {
+            rightMatches = new List<GamePiece>();
+        }
+
+        if (leftMatches == null)
+        {
+            leftMatches = new List<GamePiece>();
+        }
+        
+        //use the System.Linq.Union() method to combine the two Lists 
+        //var will default to the first data type that is put in it (a List)
+        //Union() returns an IEnumerable, so we use ToList() to make combined matches a List
+        var combinedMatches = rightMatches.Union(leftMatches).ToList();
+
+        if (combinedMatches.Count >= minLength)
+        {
+            return combinedMatches;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+
 }
