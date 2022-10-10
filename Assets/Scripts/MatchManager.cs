@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq; //used so we can combine lists into a single list using the Union() method
+using System.Linq;
+using Unity.VisualScripting; //used so we can combine lists into a single list using the Union() method
 
 public class MatchManager : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class MatchManager : MonoBehaviour
 
         //get access to the Board class
         _board = GameObject.Find("Board").GetComponent<Board>();
+        
+        HightLightMatches();
         
         Debug.Log("Reading IsWithinBound() as: " + _pieceManager.IsWithinBounds(0, 0));
     }
@@ -202,6 +206,51 @@ public class MatchManager : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    
+    //Highlight the tiles on matched game pieces 
+    //Called by MatchManager.Start()
+    void HightLightMatches()
+    {
+        //loop through the width of the board
+        for (int row = 0; row < _board.width; row++)
+        {
+            //loop through the height of the board
+            for (int col = 0; col < _board.height; col++)
+            {
+                //only runs the loop is row and col are inside the board
+                if (_pieceManager.IsWithinBounds(row, col) == false)
+                {
+                    break;
+                }
+
+                List<GamePiece> horizMatches = FindHorizontalMatches(row, col, 3);
+                List<GamePiece> vertMatches = FindVerticalMatches(row, col, 3);
+
+                //defensive programming
+                if (horizMatches == null)
+                {
+                    horizMatches = new List<GamePiece>();
+                }
+                
+                //defensive programming
+                if (vertMatches == null)
+                {
+                    vertMatches = new List<GamePiece>();
+                }
+                
+                //combine horizMatches and vertMatches using Union
+                var allMatches = horizMatches.Union(vertMatches).ToList();
+
+                foreach (var match in allMatches)
+                {
+                    Console.WriteLine("Element = {0}", match);
+
+                }
+                
+            }
         }
     }
 

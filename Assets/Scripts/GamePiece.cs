@@ -40,15 +40,15 @@ public class GamePiece : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            Move((int)this.transform.position.x - 1, (int)this.transform.position.y, 0.5f);
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Move((int)this.transform.position.x + 1, (int)this.transform.position.y, 0.5f); 
-        }
+        // if (Input.GetKeyDown(KeyCode.LeftArrow))
+        // {
+        //     Move((int)this.transform.position.x - 1, (int)this.transform.position.y, 0.5f);
+        // }
+        //
+        // if (Input.GetKeyDown(KeyCode.RightArrow))
+        // {
+        //     Move((int)this.transform.position.x + 1, (int)this.transform.position.y, 0.5f); 
+        // }
         
     }
     
