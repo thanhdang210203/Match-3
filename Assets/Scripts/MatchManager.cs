@@ -9,7 +9,10 @@ using Unity.VisualScripting; //used so we can combine lists into a single list u
     AUTHOR: DANG CONG THANH
     DATE: 27/09/2022
     Object(s) holding this script: Match manager
-    Sumarry: Highlight the matches 
+    Sumarry: 
+    Find matches using FinsMatchesAt()
+    Highlight matches using HighlightMatches() 
+    Turn off highlight using HighlightTilesOff()       
     THIS IS WHERE YOU WILL DO ALL THE THINGS THIS CLASS IS RESPONSIBLE FOR AS YOU WRITE THEM 
 ********************************************************************************************/
 public class MatchManager : MonoBehaviour
@@ -232,17 +235,26 @@ public class MatchManager : MonoBehaviour
                 {
                     break;
                 }
-                //turn of highlights on the whole board so we are ready to highlight the current matches 
-                HighlightTilesOff(row, col);
-                
-                //return a list of all matches 
-                List<GamePiece> allMatches = FindMatchesAt(row, col);
 
-                foreach (GamePiece matchPiece in allMatches)
-                {
-                    HighlightTilesOn(matchPiece.xIndex, matchPiece.yIndex);
-                }
+                HighlightMatchesAt(row, col);
             }
+        }
+    }
+
+    //checks for matches at the coordinate passed in as arguments, and
+    //if it finds them, calls HighlightTilesOn() to highlight the match 
+    //Called by HighlightMatches() when checking the whole board for matches
+    public void HighlightMatchesAt(int row, int col)
+    {
+        //turn of highlights on the whole board so we are ready to highlight the current matches 
+        HighlightTilesOff(row, col);
+
+        //return a list of all matches 
+        List<GamePiece> allMatches = FindMatchesAt(row, col);
+
+        foreach (GamePiece matchPiece in allMatches)
+        {
+            HighlightTilesOn(matchPiece.xIndex, matchPiece.yIndex);
         }
     }
 
@@ -273,7 +285,7 @@ public class MatchManager : MonoBehaviour
 
     //Resets the color and transparency of the tile at the coordinates passed
     //in so that the highlighting disappears and it returns to normal
-    //called by 
+    //called by HighlightMatchesAt()
     private void HighlightTilesOff(int x, int y)
     {
         //Change the color of the tiles back to white 
@@ -283,6 +295,7 @@ public class MatchManager : MonoBehaviour
         _board.AllTiles[x, y].gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.375f);
     }
     
+    //called by HighlightMatchesAt()
     private void HighlightTilesOn(int x, int y)
     {
         //Change the color of the tiles back to white 

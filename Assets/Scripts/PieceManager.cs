@@ -26,13 +26,15 @@ public class PieceManager : MonoBehaviour
     [SerializeField] private Tile clickedTile; //the tile player clicks on first to move the game piece 
     [SerializeField] private Tile targetTile; //the tile the player wan t the game piece to move to 
     private Board board; //reference to the Board class 
+    private MatchManager _matchManager; //reference to the match manager class
     public float swapTime = 0.5f;
     
     
     // Start is called before the first frame update
     void Start()
     {
-        board = GameObject.Find("Board").GetComponent<Board>();
+        board = GameObject.Find("Board").GetComponent<Board>(); //store the Board class 
+        _matchManager = GameObject.Find("MatchManager").GetComponent<MatchManager>(); //store the MatchManager class
         allGamePieces = new GamePiece[board.width, board.height]; //construct a new array of size width and height
         FillRandom();   
         

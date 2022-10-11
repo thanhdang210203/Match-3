@@ -7,6 +7,7 @@
     <list default="true" id="07c629a0-ae01-47f1-8f97-0f1b4f7be0ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Match-3/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/MatchManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/MatchManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PieceManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +45,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Hub\Editor\2021.3.10f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="E:\Unity\2021.3.10f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Han On D\Git\Match-3&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Han On D\Git\Match-3" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -111,6 +112,8 @@
       <workItem from="1665465228269" duration="2383000" />
       <workItem from="1665476118707" duration="722000" />
       <workItem from="1665476902329" duration="2400000" />
+      <workItem from="1665503250748" duration="1431000" />
+      <workItem from="1665504732038" duration="205000" />
     </task>
     <task id="LOCAL-00001" summary="cant">
       <created>1664872363256</created>
