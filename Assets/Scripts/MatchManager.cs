@@ -28,7 +28,7 @@ public class MatchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     //Looks for matches and then stores matching pieces in a list which it then returns to the function calling this
@@ -244,9 +244,11 @@ public class MatchManager : MonoBehaviour
                 //combine horizMatches and vertMatches using Union
                 var allMatches = horizMatches.Union(vertMatches).ToList();
 
-                foreach (var match in allMatches)
+                foreach (GamePiece match in allMatches)
                 {
                     Console.WriteLine("Element = {0}", match);
+                    Debug.Log( "The match x and y:" + match.xIndex +", "+ match.yIndex);
+                    _board.AllTiles[match.xIndex, match.yIndex].GetComponent<SpriteRenderer>().color = Color.red;
 
                 }
                 

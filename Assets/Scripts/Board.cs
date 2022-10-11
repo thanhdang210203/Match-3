@@ -16,7 +16,7 @@ public class Board : MonoBehaviour
     public int width; //board width 
     public int height; //board height
     public GameObject tileNormalPrefab; //a standard tile with the sprite attached  
-    private Tile[,] AllTiles; //a 2 dimensional array holding all the board tile scripts
+    public Tile[,] AllTiles; //a 2 dimensional array holding all the board tile scripts
 
     // Start is called before the first frame update
     void Start()
