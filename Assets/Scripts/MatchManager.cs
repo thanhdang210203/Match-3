@@ -5,6 +5,13 @@ using UnityEngine;
 using System.Linq;
 using Unity.VisualScripting; //used so we can combine lists into a single list using the Union() method
 
+/********************************************************************************************
+    AUTHOR: DANG CONG THANH
+    DATE: 27/09/2022
+    Object(s) holding this script: Match manager
+    Sumarry: Highlight the matches 
+    THIS IS WHERE YOU WILL DO ALL THE THINGS THIS CLASS IS RESPONSIBLE FOR AS YOU WRITE THEM 
+********************************************************************************************/
 public class MatchManager : MonoBehaviour
 {
     private PieceManager _pieceManager; //a reference to the PieceManager class 
@@ -20,7 +27,7 @@ public class MatchManager : MonoBehaviour
         //get access to the Board class
         _board = GameObject.Find("Board").GetComponent<Board>();
         
-        HightLightMatches();
+        HightlightMatches();
         
         Debug.Log("Reading IsWithinBound() as: " + _pieceManager.IsWithinBounds(0, 0));
     }
@@ -212,7 +219,7 @@ public class MatchManager : MonoBehaviour
     
     //Highlight the tiles on matched game pieces 
     //Called by MatchManager.Start()
-    void HightLightMatches()
+    void HightlightMatches()
     {
         //loop through the width of the board
         for (int row = 0; row < _board.width; row++)
@@ -225,36 +232,60 @@ public class MatchManager : MonoBehaviour
                 {
                     break;
                 }
-
-                List<GamePiece> horizMatches = FindHorizontalMatches(row, col, 3);
-                List<GamePiece> vertMatches = FindVerticalMatches(row, col, 3);
-
-                //defensive programming
-                if (horizMatches == null)
-                {
-                    horizMatches = new List<GamePiece>();
-                }
+                //turn of highlights on the whole board so we are ready to highlight the current matches 
+                HighlightTilesOff(row, col);
                 
-                //defensive programming
-                if (vertMatches == null)
-                {
-                    vertMatches = new List<GamePiece>();
-                }
-                
-                //combine horizMatches and vertMatches using Union
-                var allMatches = horizMatches.Union(vertMatches).ToList();
+                //return a list of all matches 
+                List<GamePiece> allMatches = FindMatchesAt(row, col);
 
-                foreach (GamePiece match in allMatches)
+                foreach (GamePiece matchPiece in allMatches)
                 {
-                    Console.WriteLine("Element = {0}", match);
-                    Debug.Log( "The match x and y:" + match.xIndex +", "+ match.yIndex);
-                    _board.AllTiles[match.xIndex, match.yIndex].GetComponent<SpriteRenderer>().color = Color.red;
-
+                    HighlightTilesOn(matchPiece.xIndex, matchPiece.yIndex);
                 }
-                
             }
         }
     }
 
+    //Finds horizontal and vertical matches and combines them into 
+    //an allMatches List that is then returned 
+    //Call by HightLightMatches to highlight matching pieces
+    private List<GamePiece> FindMatchesAt(int x, int y, int minLength = 3)
+    {
+        List<GamePiece> horizMatches = FindHorizontalMatches(x, y, minLength);
+        List<GamePiece> vertMatches = FindVerticalMatches(x, y, minLength);
 
+        //defensive programming
+        if (horizMatches == null)
+        {
+            horizMatches = new List<GamePiece>();
+        }
+
+        //defensive programming
+        if (vertMatches == null)
+        {
+            vertMatches = new List<GamePiece>();
+        }
+
+        //combine horizMatches and vertMatches using Union
+        List<GamePiece> allMatches = horizMatches.Union(vertMatches).ToList();
+        return allMatches;
+    }
+
+    //Resets the color and transparency of the tile at the coordinates passed
+    //in so that the highlighting disappears and it returns to normal
+    //called by 
+    private void HighlightTilesOff(int x, int y)
+    {
+        //Change the color of the tiles back to white 
+        _board.AllTiles[x, y].gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        
+        //minus 0 in red, 0 in blue, 0 in green and 0.375 in alpha to return the tile to an alpha of 160
+        _board.AllTiles[x, y].gameObject.GetComponent<SpriteRenderer>().color -= new Color(0, 0, 0, 0.375f);
+    }
+    
+    private void HighlightTilesOn(int x, int y)
+    {
+        //Change the color of the tiles back to white 
+        _board.AllTiles[x, y].gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+    }
 }
