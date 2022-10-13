@@ -261,7 +261,7 @@ public class MatchManager : MonoBehaviour
     //Finds horizontal and vertical matches and combines them into 
     //an allMatches List that is then returned 
     //Call by HightLightMatches to highlight matching pieces
-    private List<GamePiece> FindMatchesAt(int x, int y, int minLength = 3)
+    public List<GamePiece> FindMatchesAt(int x, int y, int minLength = 3)
     {
         List<GamePiece> horizMatches = FindHorizontalMatches(x, y, minLength);
         List<GamePiece> vertMatches = FindVerticalMatches(x, y, minLength);

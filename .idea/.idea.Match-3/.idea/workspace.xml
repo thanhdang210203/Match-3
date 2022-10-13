@@ -45,7 +45,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="E:\Unity\2021.3.10f1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Hub\Editor\2021.3.10f1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath &quot;D:\Han On D\Git\Match-3&quot; -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="D:\Han On D\Git\Match-3" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -114,6 +114,8 @@
       <workItem from="1665476902329" duration="2400000" />
       <workItem from="1665503250748" duration="1431000" />
       <workItem from="1665504732038" duration="205000" />
+      <workItem from="1665651884439" duration="1400000" />
+      <workItem from="1665653334629" duration="1191000" />
     </task>
     <task id="LOCAL-00001" summary="cant">
       <created>1664872363256</created>

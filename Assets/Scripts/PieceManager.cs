@@ -188,31 +188,7 @@ public class PieceManager : MonoBehaviour
 
     void SwitchTile(Tile tileClicked, Tile tileTargeted)
     {
-       
-        //add code to switch tiles
-        if (_clickedPiece == null) //wont run if _clickedPiece is null 
-        {
-            _clickedPiece = allGamePieces[tileClicked.xIndex, tileClicked.yIndex];
-            Debug.Log("Clicking piece");
-        }
-
-        if (_targetPiece == null)
-        {
-            _targetPiece = allGamePieces[tileTargeted.xIndex, tileTargeted.yIndex];
-            Debug.Log("Targeting piece");
-        }
-
-        if (_clickedPiece != null && _targetPiece != null)
-        {
-            _clickedPiece.Move(_targetPiece.xIndex, _targetPiece.yIndex, swapTime);
-            _targetPiece.Move(_clickedPiece.xIndex, _clickedPiece.yIndex, swapTime);
-            Debug.Log("Switching");
-            _clickedPiece = null;
-            _targetPiece = null;
-        }
-        
-        //reset the two so they can be click again 
-       
+        StartCoroutine(SwitchTilesRoutine(tileClicked, tileTargeted));
     }
 
     bool IsNextTo(Tile startTile, Tile endTile)
@@ -237,5 +213,52 @@ public class PieceManager : MonoBehaviour
        
         return false;
 
+    }
+
+    
+    //switches the places of the clickedTile and the targetTile 
+    IEnumerator SwitchTilesRoutine(Tile tileClicked, Tile tileTargeted)
+    {
+        _clickedPiece = allGamePieces[tileClicked.xIndex, tileClicked.yIndex];
+        
+        _targetPiece = allGamePieces[tileTargeted.xIndex, tileTargeted.yIndex];
+
+        if (_clickedPiece != null && _targetPiece != null)
+        {
+            //Move the clicked piece to the x and y of the targeted piece
+            _clickedPiece.Move(_targetPiece.xIndex, _targetPiece.yIndex, swapTime);
+            //move the targeted piece to the x and y of the clicked piece 
+            _targetPiece.Move(_clickedPiece.xIndex, _clickedPiece.yIndex, swapTime);
+
+            //yield so the pieces can move and the array updates with the new positions 
+            yield return new WaitForSeconds(swapTime);
+        
+            //return a list of matches for the clicked piece 
+            List<GamePiece> tileClickedMatches = _matchManager.FindMatchesAt(tileClicked.xIndex, tileClicked.yIndex);
+        
+            //return a list of matches for the targeted piece
+            List<GamePiece> tileTargetedMatches = _matchManager.FindMatchesAt(tileTargeted.xIndex, tileTargeted.yIndex);
+        
+            //if neither of the list have anything in them, we havent made a match
+            if (tileClickedMatches.Count == 0 && tileTargetedMatches.Count == 0)
+            {
+                //move the clicked piece back to the clicked tile(it's original location)
+                _clickedPiece.Move(tileClicked.xIndex, tileClicked.yIndex, swapTime);
+            
+                //move the target piece back to the target tile (it's original location)
+                _targetPiece.Move(tileTargeted.xIndex, tileTargeted.yIndex, swapTime);
+                
+                //yield so the pieces can move back and the array updates with the new position 
+                yield return new WaitForSeconds(swapTime);
+            }
+
+            //after the tileClicked piece has moved, highlight the tiles of any matches
+            _matchManager.HighlightMatchesAt(tileClicked.xIndex, tileClicked.yIndex);
+            
+            //after the tileTargeted piece has moved, highlight the tiles of any matches 
+            _matchManager.HighlightMatchesAt(tileTargeted.xIndex, tileTargeted.yIndex);
+        }
+        
+     
     }
 }
