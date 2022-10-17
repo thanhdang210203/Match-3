@@ -112,6 +112,12 @@ public class MatchManager : MonoBehaviour
             //if the next piece is within the bounds of the board create a 
             //variable to store the next piece
             GamePiece nextPiece = _pieceManager.allGamePieces[nextX, nextY];
+            
+            //check to see if our game piece is null 
+            if (nextPiece == null)
+            {
+                break;
+            }
 
             //if the nextPiece matches the startPiece and the matches list 
             //doesn't already have the next piece 

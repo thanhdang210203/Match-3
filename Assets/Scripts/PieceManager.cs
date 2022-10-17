@@ -28,16 +28,17 @@ public class PieceManager : MonoBehaviour
     private Board board; //reference to the Board class 
     private MatchManager _matchManager; //reference to the match manager class
     public float swapTime = 0.5f;
-    
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
         board = GameObject.Find("Board").GetComponent<Board>(); //store the Board class 
         _matchManager = GameObject.Find("MatchManager").GetComponent<MatchManager>(); //store the MatchManager class
         allGamePieces = new GamePiece[board.width, board.height]; //construct a new array of size width and height
-        FillRandom();   
-        
+        FillRandom();
+        ClearPiecesAt(1, 1);
+        ClearPiecesAt(3, 5);
     }
 
     //Returns a random game piece from the GamePiecesPrefab array
@@ -47,13 +48,13 @@ public class PieceManager : MonoBehaviour
         //get a random number between 0 and all the game pieces -1 in the gamePiecesPrefab array
         //the .Length property of an array is not inclusive to the final number 
         int randomIdx = Random.Range(0, gamePiecePrefab.Length);
-        
+
         //safety check to make sure the array is populated in the Inspector panel 
         if (gamePiecePrefab[randomIdx] == null)
         {
             Debug.LogWarning("WARNING: Element " + randomIdx + " in the GamePiecesPrefab array is reading as null!");
         }
-        
+
         //return the selected game piece to the function calling it
         return gamePiecePrefab[randomIdx];
     }
@@ -69,10 +70,10 @@ public class PieceManager : MonoBehaviour
             Debug.LogWarning("PieceManager: Invalid gamePiece!");
             return; //break out of the method so the line dont run
         }
-        
+
         //move the game piece passed into the bracket by the function call to the x and y passed in 
         gamePiece.transform.position = new Vector3(x, y, 0);
-        
+
         //set the rotation back to zero if accidentally rotate it 
         gamePiece.transform.rotation = Quaternion.identity;
 
@@ -83,12 +84,12 @@ public class PieceManager : MonoBehaviour
             //assign the gamePiece to the correct place in the allGamePieces array
             allGamePieces[x, y] = gamePiece;
         }
-        
+
         //call the SetCoord() method to populate GamePiece.xIndex and GamePiece.yIndex variable 
         gamePiece.SetCoord(x, y);
-        
+
     }
-    
+
     //Function that returns true or false depending on the x, y coordinates
     //passed in are within the boundary of the board 
     //Called by PlaceGamePiece() above when adding a piece to the allGamePieces array 
@@ -108,26 +109,28 @@ public class PieceManager : MonoBehaviour
             return false;
         }
     }
+
     private void FillRandom()
     {
         for (int row = 0; row < board.width; row++)
         {
             for (int col = 0; col < board.height; col++)
-            { 
+            {
                 GameObject randomPieces = GetRandomGamePiece();
                 //instantiate the gamePiecesPrefab at coordinates row and col
                 //Instantiate() constructs an Object, so this 'cast' it instead as a GameObject
-                GameObject randomPiece = Instantiate(randomPieces, new Vector3(row, col, 0), Quaternion.identity) as GameObject;
-                
+                GameObject randomPiece =
+                    Instantiate(randomPieces, new Vector3(row, col, 0), Quaternion.identity) as GameObject;
+
                 //Set the tile name to it's coordinate
                 randomPiece.name = "Piece (" + row + "," + col + ")";
-                
+
                 //Store the gamePiecesPrefab GamePieces script at the appropriate position in the array 
                 allGamePieces[row, col] = randomPiece.GetComponent<GamePiece>();
-                
+
                 //parent gamePiece to the pieces object in the Hierarchy
                 randomPiece.transform.parent = GameObject.Find("Pieces").transform;
-                
+
                 //call the SetCoord method on the tile and pass it row and col (which become SetCoord.xIndex and 
                 //SetCoord.yIndex
                 allGamePieces[row, col].SetCoord(row, col);
@@ -154,20 +157,20 @@ public class PieceManager : MonoBehaviour
             Debug.Log("Clicked tile" + tile.name);
         }
     }
-    
+
     //if a tile has been clicked, set the targetTile variable to the on passed in 
     //called by Tile.OnMouseOver() when a tile has been entered by the mouse 
     public void DragToTile(Tile tile)
     {
-            //if there is a tile that has been clicked on
-            if (clickedTile != null && IsNextTo(clickedTile, tile))
-            {
-                //set the target tile to the tile passed in 
-                targetTile = tile;
-                Debug.Log("Target Tile: " + targetTile.name);
-            }
+        //if there is a tile that has been clicked on
+        if (clickedTile != null && IsNextTo(clickedTile, tile))
+        {
+            //set the target tile to the tile passed in 
+            targetTile = tile;
+            Debug.Log("Target Tile: " + targetTile.name);
+        }
     }
-      
+
     //Checks if clickedTile and targetTile are valid tiles and 
     //calls SwitchTile() below to swap their places
     //called by ****
@@ -178,9 +181,9 @@ public class PieceManager : MonoBehaviour
         {
             //call SwitchTile() below to switch the two's position
             SwitchTile(clickedTile, targetTile);
-             //Debug.Log("tt " + targetTile.name);
+            //Debug.Log("tt " + targetTile.name);
         }
-        
+
         //reset the clickedTile and targetTile so tiles can be clicked again 
         clickedTile = null;
         targetTile = null;
@@ -204,23 +207,24 @@ public class PieceManager : MonoBehaviour
             Debug.Log("Moving left right");
             return true;
         }
+
         //Move 1 up
-        if (Mathf.Abs(Mathf.Abs(yEnd) - Mathf.Abs(yStart))  == 1 && Mathf.Abs(xStart - xEnd) == 0)
+        if (Mathf.Abs(Mathf.Abs(yEnd) - Mathf.Abs(yStart)) == 1 && Mathf.Abs(xStart - xEnd) == 0)
         {
             Debug.Log("Moving up down");
             return true;
-        } 
-       
+        }
+
         return false;
 
     }
 
-    
+
     //switches the places of the clickedTile and the targetTile 
     IEnumerator SwitchTilesRoutine(Tile tileClicked, Tile tileTargeted)
     {
         _clickedPiece = allGamePieces[tileClicked.xIndex, tileClicked.yIndex];
-        
+
         _targetPiece = allGamePieces[tileTargeted.xIndex, tileTargeted.yIndex];
 
         if (_clickedPiece != null && _targetPiece != null)
@@ -232,33 +236,51 @@ public class PieceManager : MonoBehaviour
 
             //yield so the pieces can move and the array updates with the new positions 
             yield return new WaitForSeconds(swapTime);
-        
+
             //return a list of matches for the clicked piece 
             List<GamePiece> tileClickedMatches = _matchManager.FindMatchesAt(tileClicked.xIndex, tileClicked.yIndex);
-        
+
             //return a list of matches for the targeted piece
             List<GamePiece> tileTargetedMatches = _matchManager.FindMatchesAt(tileTargeted.xIndex, tileTargeted.yIndex);
-        
+
             //if neither of the list have anything in them, we havent made a match
             if (tileClickedMatches.Count == 0 && tileTargetedMatches.Count == 0)
             {
                 //move the clicked piece back to the clicked tile(it's original location)
                 _clickedPiece.Move(tileClicked.xIndex, tileClicked.yIndex, swapTime);
-            
+
                 //move the target piece back to the target tile (it's original location)
                 _targetPiece.Move(tileTargeted.xIndex, tileTargeted.yIndex, swapTime);
-                
+
                 //yield so the pieces can move back and the array updates with the new position 
                 yield return new WaitForSeconds(swapTime);
             }
 
             //after the tileClicked piece has moved, highlight the tiles of any matches
             _matchManager.HighlightMatchesAt(tileClicked.xIndex, tileClicked.yIndex);
-            
+
             //after the tileTargeted piece has moved, highlight the tiles of any matches 
             _matchManager.HighlightMatchesAt(tileTargeted.xIndex, tileTargeted.yIndex);
         }
-        
-     
+
+
+    }
+
+    //Clears matched pieces at the location passed in 
+    //Called by ClearBoard() to clear the entire board
+    void ClearPiecesAt(int x, int y)
+    {
+        //store the piece at the x and the y arguments in a variable 
+        GamePiece pieceToClear = allGamePieces[x, y];
+
+        //check we have a game piece that is valid at that location 
+        if (pieceToClear != null)
+        {
+            //destroy the piece to clear
+            Destroy(pieceToClear.gameObject);
+
+            //set that location of the allGamePieces array to null
+            allGamePieces[x, y] = null;
+        }
     }
 }
