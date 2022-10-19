@@ -118,21 +118,22 @@ public class MatchManager : MonoBehaviour
             {
                 break;
             }
-
-            //if the nextPiece matches the startPiece and the matches list 
-            //doesn't already have the next piece 
-            if (nextPiece.matchValue == startPiece.matchValue && !matches.Contains(nextPiece))
+            else
             {
-                //We already have a match!
-                //Add the next game piece to our list of matches 
-                matches.Add(nextPiece);
+                //if the nextPiece matches the startPiece and the matches list 
+                //doesn't already have the next piece 
+                if (nextPiece.matchValue == startPiece.matchValue && !matches.Contains(nextPiece))
+                {
+                    //We already have a match!
+                    //Add the next game piece to our list of matches 
+                    matches.Add(nextPiece);
+                }
+                else //the next piece isnt a match 
+                {
+                    //breakout of the loop
+                    break;
+                }
             }
-            else //the next piece isnt a match 
-            {
-                //breakout of the loop
-                break;
-            }
-
         }
 
         //if the number of matches meets or exceeds the required amount
@@ -306,5 +307,33 @@ public class MatchManager : MonoBehaviour
     {
         //Change the color of the tiles back to white 
         _board.AllTiles[x, y].gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+    }
+
+    public bool HasMatchOnFill(int x, int y, int minLength = 3)
+    {
+        //call FindMatches() to populate 2 Lists of matches 
+        List<GamePiece> leftMatches = FindMatches(x, y, new Vector2(-1, 0), minLength);
+        List<GamePiece> downwardMatches = FindMatches(x, y, new Vector2(0, -1), minLength);
+
+        //defendsive programing
+        if (leftMatches == null)
+        {
+            leftMatches = new List<GamePiece>();
+        }
+        //defendsive programing
+        if (downwardMatches == null)
+        {
+            downwardMatches = new List<GamePiece>();
+        }
+
+        //check whether leftMatches OR downwardMatches have anything in them
+        if (leftMatches.Count > 0 || downwardMatches.Count > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

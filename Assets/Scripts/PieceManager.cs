@@ -36,9 +36,9 @@ public class PieceManager : MonoBehaviour
         board = GameObject.Find("Board").GetComponent<Board>(); //store the Board class 
         _matchManager = GameObject.Find("MatchManager").GetComponent<MatchManager>(); //store the MatchManager class
         allGamePieces = new GamePiece[board.width, board.height]; //construct a new array of size width and height
-        FillRandom();
-        ClearPiecesAt(1, 1);
-        ClearPiecesAt(3, 5);
+        FillBoard();
+        // ClearPiecesAt(1, 1);
+        // ClearPiecesAt(3, 5);
     }
 
     //Returns a random game piece from the GamePiecesPrefab array
@@ -61,7 +61,7 @@ public class PieceManager : MonoBehaviour
 
     //Places a game piece at the x and y passed in 
     //Adds the game piece passed in to the allGamePiece array
-    //called by FillRandom() below when the board is first filled with pieces 
+    //called by FillBoard() below when the board is first filled with pieces 
     public void PlaceGamePiece(GamePiece gamePiece, int x, int y)
     {
         //safety check to make sure the gamePiece passed in has a value 
@@ -110,39 +110,56 @@ public class PieceManager : MonoBehaviour
         }
     }
 
-    private void FillRandom()
+    private void FillBoard()
     {
         for (int row = 0; row < board.width; row++)
         {
             for (int col = 0; col < board.height; col++)
             {
-                GameObject randomPieces = GetRandomGamePiece();
-                //instantiate the gamePiecesPrefab at coordinates row and col
-                //Instantiate() constructs an Object, so this 'cast' it instead as a GameObject
-                GameObject randomPiece =
-                    Instantiate(randomPieces, new Vector3(row, col, 0), Quaternion.identity) as GameObject;
-
-                //Set the tile name to it's coordinate
-                randomPiece.name = "Piece (" + row + "," + col + ")";
-
-                //Store the gamePiecesPrefab GamePieces script at the appropriate position in the array 
-                allGamePieces[row, col] = randomPiece.GetComponent<GamePiece>();
-
-                //parent gamePiece to the pieces object in the Hierarchy
-                randomPiece.transform.parent = GameObject.Find("Pieces").transform;
-
-                //call the SetCoord method on the tile and pass it row and col (which become SetCoord.xIndex and 
-                //SetCoord.yIndex
-                allGamePieces[row, col].SetCoord(row, col);
-
-                //Defensive programming to make sure the randomPiece returned is a value
-                if (randomPiece != null)
-                {
-                    //Initialise the GamePiece to give it access to the PieceManager 
-                    randomPiece.GetComponent<GamePiece>().Init(this);
-                }
+                GamePiece piece =  FillRandomAt(row, col);
             }
         }
+    }
+
+    //Put a random game piece at the coordinates passed in as arguments 
+    //Called by FillBoard() when the board is filled at the start of the game
+    private GamePiece FillRandomAt(int row, int col)
+    {
+        GameObject randomPieces = GetRandomGamePiece();
+        //instantiate the gamePiecesPrefab at coordinates row and col
+        //Instantiate() constructs an Object, so this 'cast' it instead as a GameObject
+        GameObject randomPiece = Instantiate(randomPieces, new Vector3(row, col, 0), Quaternion.identity) as GameObject;
+
+        //Set the tile name to it's coordinate
+        randomPiece.name = "Piece (" + row + "," + col + ")";
+
+        //Store the gamePiecesPrefab GamePieces script at the appropriate position in the array 
+        allGamePieces[row, col] = randomPiece.GetComponent<GamePiece>();
+        
+        //call the SetCoord method on the tile and pass it row and col (which become SetCoord.xIndex and 
+        //SetCoord.yIndex
+        allGamePieces[row, col].SetCoord(row, col);
+
+        //Defensive programming to make sure the randomPiece returned is a value
+        if (randomPiece != null)
+        {
+            //move the game piece to the game pieces sorting layer it appears in front of the line 
+            randomPiece.GetComponent<SpriteRenderer>().sortingLayerName = "Pieces";
+            
+            //parent gamePiece to the pieces object in the Hierarchy
+            randomPiece.transform.parent = GameObject.Find("Pieces").transform;
+            
+            //Initialise the GamePiece to give it access to the PieceManager 
+            randomPiece.GetComponent<GamePiece>().Init(this);
+            
+            //if it is valid, place it at the row and col of the current loop 
+            PlaceGamePiece(randomPiece.GetComponent<GamePiece>(), row, col);
+
+            //return the GamePiece to the function calling this
+            return randomPiece.GetComponent<GamePiece>();
+        }
+
+        return null;
     }
 
     //set the clickedTile variable to the tile passed in 
@@ -255,12 +272,11 @@ public class PieceManager : MonoBehaviour
                 //yield so the pieces can move back and the array updates with the new position 
                 yield return new WaitForSeconds(swapTime);
             }
-
-            //after the tileClicked piece has moved, highlight the tiles of any matches
-            _matchManager.HighlightMatchesAt(tileClicked.xIndex, tileClicked.yIndex);
-
-            //after the tileTargeted piece has moved, highlight the tiles of any matches 
-            _matchManager.HighlightMatchesAt(tileTargeted.xIndex, tileTargeted.yIndex);
+            else
+            {
+                ClearPiecesAt(tileClickedMatches);
+                ClearPiecesAt(tileTargetedMatches);
+            }
         }
 
 
@@ -281,6 +297,22 @@ public class PieceManager : MonoBehaviour
 
             //set that location of the allGamePieces array to null
             allGamePieces[x, y] = null;
+        }
+    }
+
+    //overloaded version of CLearPiecesAt(int x, int y) above
+    //Our program will know which one to use,depending on 
+    //the value passed in 
+    //Clear out a list of GamePieces passed in as arguments 
+    //Called by 
+    void ClearPiecesAt(List<GamePiece> gamePieces)
+    {
+        //loop through the list passed in 
+        foreach (GamePiece piece in gamePieces)
+        {
+            //call the original ClearPiecesAt() and pass in
+            //The x and the y of each piece in the list 
+            ClearPiecesAt(piece.xIndex, piece.yIndex);
         }
     }
 }
