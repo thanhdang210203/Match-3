@@ -270,6 +270,10 @@ public class MatchManager : MonoBehaviour
     //Call by HightLightMatches to highlight matching pieces
     public List<GamePiece> FindMatchesAt(int x, int y, int minLength = 3)
     {
+        //safety check to make sure that we definitely have PieceManager and Board
+        _pieceManager = GameObject.Find("PieceManager").GetComponent<PieceManager>();
+        _board = GameObject.Find("Board").GetComponent<Board>();
+        
         List<GamePiece> horizMatches = FindHorizontalMatches(x, y, minLength);
         List<GamePiece> vertMatches = FindVerticalMatches(x, y, minLength);
 

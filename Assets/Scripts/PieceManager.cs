@@ -112,11 +112,31 @@ public class PieceManager : MonoBehaviour
 
     private void FillBoard()
     {
+        int maxLoops = 100;
+        int loops = 0;
         for (int row = 0; row < board.width; row++)
         {
             for (int col = 0; col < board.height; col++)
             {
                 GamePiece piece =  FillRandomAt(row, col);
+                
+                //keep looping until the game piece at row, col has no matches
+                //HasMatchOnFill() returns true when the random piece made has matches
+                while (_matchManager.HasMatchOnFill(row, col) == true)
+                {
+                    //clear the starting piece that has matches 
+                    ClearPiecesAt(row, col);
+                    
+                    //Place a new random  game piece with FillRandomAt()
+                    piece = FillRandomAt(row, col);
+                    if (loops > maxLoops)
+                    {
+                         //add one to the number of loops
+                         loops++;
+                         Debug.LogWarning("Warning: FillBoard has exceeded the maximum of loops!");
+                         break;
+                    }
+                }
             }
         }
     }
